@@ -17,3 +17,13 @@ class FollowerList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(ownr=self.request.user)
     
+
+class FollowerDetail(generics.RetrieveDestroyAPIView):
+    '''
+    Retrieve a follower.
+    No Update view, only follow or unfollow someone.
+    Destroy a follower happens when unfollow someone
+    '''
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Follower.objects.all()
+    serializer_class = FollowerSerialzier

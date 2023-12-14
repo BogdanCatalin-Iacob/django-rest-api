@@ -1,19 +1,16 @@
-from django.http import Http404
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics, permissions
+from django_rest_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
-from django_rest_api.permissions import IsOwnerOrReadOnly
 
 
-class ProfileList(APIView):
-    def get(self, request):
-        profiles = Profile.objects.all()
-        #before creating a respone
-        serializers = ProfileSerializer(
-            profiles, many=True, context={'request': request})
-        return Response(serializers.data)
+class ProfileList(generics.ListAPIView):
+    '''
+    List all profiles
+    No profile creation as it is handled by django signals
+    '''
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
 
 
 class ProfileDetail(APIView):

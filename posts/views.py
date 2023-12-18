@@ -24,7 +24,12 @@ class PostList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
     
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        filters.SearchFilter
+    ]
+    search_fields = [
+        'owner__username',
+        'title'
     ]
     ordering_fields = [
         'comments_count',

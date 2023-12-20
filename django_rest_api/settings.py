@@ -70,7 +70,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['localhost', 'https://django-rest-api-social-app-7dfc69d9cf56.herokuapp.com/']
+ALLOWED_HOSTS = ['*','localhost', 'https://django-rest-api-social-app-7dfc69d9cf56.herokuapp.com/']
 
 
 # Application definition
